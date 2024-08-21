@@ -1,7 +1,21 @@
-export type ApiPermission = {
+import dayjs from "dayjs";
+
+export type PermissionTypeModel = {
   id: number;
-  NombreEmpleado: string;
-  ApellidoEmpleado: string;
-  TipoPermiso: number;
-  FechaPermiso: Date;
+  description: string;
+};
+
+export type PermissionModel = {
+  id: number;
+  employeeName: string;
+  employeeLastName: string;
+  permissionTypeId: number;
+  permissionDate: dayjs.Dayjs | null;
+};
+
+export type InputCreatePermission = {
+  employeeName: string;
+  employeeLastName: string;
+  permissionTypeId: number;
+  permissionDate: Date;
 };
