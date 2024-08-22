@@ -79,7 +79,7 @@ export function usePermissions() {
           data: null,
         };
       }
-      updatePermissions(data.data);
+
       return {
         message: "",
         success: true,
@@ -96,9 +96,11 @@ export function usePermissions() {
   }
 
   return {
+    updatePermissions,
     permissions,
     setPermissions,
     permissionTypes,
+    dispatchGetPermissions,
     dispatchCreatePermissions,
     dispatchUpdatePermission,
   };

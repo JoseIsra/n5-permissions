@@ -34,6 +34,7 @@ type FormData = {
   lastname: string;
   permissionType: string;
   permissionDate: dayjs.Dayjs | null;
+  permissionDescription: string;
 };
 
 const initialState = {
@@ -42,12 +43,14 @@ const initialState = {
   lastname: "",
   permissionType: "1",
   permissionDate: dayjs(new Date()),
+  permissionDescription: "",
 };
 
 function App() {
   const {
     permissions,
     permissionTypes,
+    dispatchGetPermissions,
     dispatchCreatePermissions,
     dispatchUpdatePermission,
   } = usePermissions();
@@ -91,6 +94,7 @@ function App() {
     });
     handleCloseDialog();
     setFormData(initialState);
+    dispatchGetPermissions();
   };
 
   const handleTextFieldChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -121,19 +125,28 @@ function App() {
       username: permission.employeeName,
       permissionType: String(permission.permissionTypeId),
       permissionDate: permission.permissionDate,
+      permissionDescription: permission.permissionTypeDescription,
     });
     setDialogType("edit");
     setDialogVisible(true);
   };
 
   const handleEditPermission = async () => {
-    const { id, lastname, username, permissionType, permissionDate } = formData;
+    const {
+      id,
+      lastname,
+      username,
+      permissionType,
+      permissionDate,
+      permissionDescription,
+    } = formData;
     const { success } = await dispatchUpdatePermission({
       employeeLastName: lastname,
       employeeName: username,
       id: id,
       permissionDate: permissionDate,
       permissionTypeId: Number(permissionType),
+      permissionTypeDescription: permissionDescription,
     });
     if (!success) return;
 
@@ -143,6 +156,7 @@ function App() {
     });
     handleCloseDialog();
     setFormData(initialState);
+    dispatchGetPermissions();
   };
 
   const handleSubmitForm = () => {
