@@ -15,7 +15,6 @@ type PermissionCardProps = {
   permission: PermissionModel;
   handleOpenEditDialog: (permission: PermissionModel) => void;
 };
-// background: "#3f51b5",
 
 const StyledCard = styled(Card)({
   width: "100%",
@@ -34,7 +33,7 @@ export const PermissionCard = ({
     <StyledCard>
       <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
         <Chip
-          label="Permiso médico"
+          label={permission.permissionTypeDescription}
           icon={<CategoryIcon />}
           color="secondary"
           variant="filled"

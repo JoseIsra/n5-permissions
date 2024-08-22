@@ -9,6 +9,7 @@ export type PermissionModel = {
   id: number;
   employeeName: string;
   employeeLastName: string;
+  permissionTypeDescription: string;
   permissionTypeId: number;
   permissionDate: dayjs.Dayjs | null;
 };
